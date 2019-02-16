@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./register.css">
+    <style>
+    </style>
+    <title>Register</title>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+<!--
+    you can substitute the span of reauth email for a input with the email and
+    include the remember me checkbox
+    -->
+    <div class="container">
+        <div class="card card-container">
+            <p id="profile-name" class="profile-name-card"><strong><h2>iNet Registration</h2></strong></p>
+            <form class="form-signin" method="POST" action="/api/v1/registeruser">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="text" id="username" class="form-control" placeholder="Email" name="email" required="">
+                <input type="password" id="password" class="form-control" placeholder="Password" name="password" required="">
+                <input type="text" id="firstname" class="form-control" placeholder="First Name" name="firstname" required="">
+                <input type="text" id="lastname" class="form-control" placeholder="Last Name" name="lastname" required="">
+                <select>
+                  <option value="volvo">Select Your City</option>
+                  <option value="saab">Kirkwood</option>
+                  <option value="opel">Webster</option>
+                  <option value="audi">St. Charles</option>
+                  <option value="audi">O'Fallon</option>
+                  <option value="audi">Creve Coeur</option>
+                  <option value="audi">Belleville</option>
+                </select><br><br>
+                <h4>What do you have to offer?</h4>
+                <strong>Mentoring</strong><br>
+                <select>
+                  <option value="volvo">Select A Subject</option>
+                  <option value="saab">Math</option>
+                  <option value="opel">Science</option>
+                  <option value="audi">English</option>
+                  <option value="audi">Spanish</option>
+                  <option value="audi">Chinese</option>
+                  <option value="audi">Latin</option>
+                  <option value="audi">Greek</option>
+                  <option value="audi">Computer Science</option>
+                </select><br><br>
+                <strong>Coaching</strong><br>
+                <select>
+                  <option value="volvo">Select Your Sport</option>
+                  <option value="saab">Soccer</option>
+                  <option value="opel">Football</option>
+                  <option value="audi">Basketball</option>
+                  <option value="audi">Rugby</option>
+                  <option value="audi">Track</option>
+                  <option value="audi">Hockey</option>
+                  <option value="audi">Cross Country</option>
+                  <option value="audi">Wrestling</option>
+                </select><br><br>
+                <strong>Certifications</strong><br>
+                  <input type="checkbox" name="drillpress" value="drillpress"> Drill Press<br>
+                  <input type="checkbox" name="circlesaw" value="circlesaw"> Circle Saw<br>
+                  <input type="checkbox" name="bevel" value="bevel"> Bevel<br>
+                  <input type="checkbox" name="screwgun" value="screwgun"> Screw Gun<br>
+                <div type="submit" class="btn btn-primary btn-block" onclick="myFunction();return false">Register</div>
+            </form>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+    <script>
+      function myFunction()
+      {
+          var email = document.getElementsByName("email")[0].value;
+          var password = document.getElementsByName("password")[0].value;
+          var firstname = document.getElementsByName("firstname")[0].value;
+          var lastname = document.getElementsByName("lastname")[0].value;
+          var skills = [];
+          // if ($('#drillpress').is(":checked"))
+          // {
+          //   skills.push("drill press");
+          // }
+          // if ($('#circlesaw').is(":checked"))
+          // {
+          //   skills.push("circle saw");
+          // }
+          // if ($('#bevel').is(":checked"))
+          // {
+          //   skills.push("bevel");
+          // }
+          // if ($('#screwgun').is(":checked"))
+          // {
+          //   skills.push("screw gun");
+          // }
+
+console.log("foobar");
+var donorInfo = {"email":email,"password":password,"firstname":firstname, "lastname":lastname,
+"skills":skills};
+  console.log(donorInfo);
+  // window.location = "file:///Users/alvinalaphat/Documents/WWT/UserSystem/login.html";
+
+jQuery.post(
+  "http://127.0.0.1:3005/register", donorInfo, function(data){
+      console.log(data);
+  }
+);
+}
+    </script>
+  </body>
+</html>
