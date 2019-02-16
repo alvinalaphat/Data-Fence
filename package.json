@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MicahSee/sluhumslhack#readme",
   "dependencies": {
-    "mapwize": "^3.2.1"
+    "mapwize": "^3.2.1",
+    "mathjs": "^5.4.2"
   }
 }
