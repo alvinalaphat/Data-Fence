@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/MicahSee/sluhumslhack/issues"
   },
-  "homepage": "https://github.com/MicahSee/sluhumslhack#readme"
+  "homepage": "https://github.com/MicahSee/sluhumslhack#readme",
+  "dependencies": {
+    "mapwize": "^3.2.1"
+  }
 }
