@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <script type="text/javascript" src="node_modules/mapwize/mapwize.js"></script>
+        <style>
+            #mapwize {
+                height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="mapwize"></div>
+        <script>
+            Mapwize.apiKey('7ac5381c88abaf3a79d8a8420fda84fc')
+            Mapwize.map({
+                container: 'mapwize',
+            }).then(map => {
+                // Mapwize map is now ready to be used
+            }).catch(err => {
+                // Something bad happened during Mapwize loading
+                console.error(err);
+            });
+        </script>
+    </body>
+</html>

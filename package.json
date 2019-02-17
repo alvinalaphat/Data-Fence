@@ -1,0 +1,23 @@
+{
+  "name": "sluhumslhack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "activeapp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MicahSee/sluhumslhack.git"
+  },
+  "author": "Micah See",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MicahSee/sluhumslhack/issues"
+  },
+  "homepage": "https://github.com/MicahSee/sluhumslhack#readme",
+  "dependencies": {
+    "mapwize": "^3.2.1",
+    "mathjs": "^5.4.2"
+  }
+}
