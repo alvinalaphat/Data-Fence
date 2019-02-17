@@ -1,24 +1,26 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="style2.css" type="text/css" />
+    <meta name="viewport" content="width=device-width", initial-scale=1">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css"
+    />
   </head>
   <body>
-    <button id="myBtn">Open Modal</button>
-
     <div id="modalbox" class="modal">
-      <div class="modal-content">
-        <p>DO YOU SEE OR HEAR THE SCHOOL SHOOTER</p>
+      <article id="article" class="message is-warning">
+        <div class="message-header modal-content">
+          <h1>INTRUDER ALER: THIS IS NOT A DRILL</h1>
+        </div>
+        <div class="message-body modal-content">
+          <p>DO YOU SEE OR HEAR THE SCHOOL SHOOTER</p>
 
-        <button id="yes">YES</button>
-        <button id="no">No</button>
-      </div>
+          <button id="yes" class="button is-danger">YES</button>
+          <button id="no" class="button is-success">No</button>
+        </div>
+      </article>
     </div>
-
-    <p>Click the button to get your coordinates.</p>
-
-    <button>Try It</button>
-
-    <p id="demo2"></p>
 
     <script src="index2.js"></script>
   </body>

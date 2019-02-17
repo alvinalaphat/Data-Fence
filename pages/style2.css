@@ -1,5 +1,9 @@
-.modal {
-  display: block; /* Hidden by default */
+#article {
+  background-color: #999999;
+}
+
+#modalbox {
+  display: flex; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -13,24 +17,37 @@
 
 /* Modal Content/Box */
 .modal-content {
+  text-align: center;
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
+
   width: 80%; /* Could be more or less, depending on screen size */
 }
 
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.blinking {
+  animation: blinkingText 0.5s infinite;
 }
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+@keyframes blinkingText {
+  0% {
+    color: #000;
+  }
+  49% {
+    color: transparent;
+  }
+  50% {
+    color: transparent;
+  }
+  97% {
+    color: transparent;
+  }
+  98% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
 }

@@ -25,8 +25,8 @@ no.onclick = function() {
 
 function open() {
   setTimeout(function() {
-    modal.style.display = "block";
-  }, 10000);
+    modal.style.display = "flex";
+  }, 1000);
 }
 
 var x = document.getElementById("demo");
@@ -51,6 +51,7 @@ function showPosition(position) {
   };
   var myJson = JSON.stringify(response);
   document.getElementById("demo2").innerHTML = myJson;
+  answers.push(myJson);
 }
 
 function getLocation2() {
@@ -71,6 +72,24 @@ function showPosition2(position) {
     latitude: lat,
     answer: "no"
   };
-  var myJson = JSON.stringify(response);
-  document.getElementById("demo2").innerHTML = myJson;
+  var myJson2 = JSON.stringify(response);
+  document.getElementById("demo2").innerHTML = myJson2;
+  answers.push(myJson2);
 }
+
+article = document.getElementById("article");
+
+function changer() {
+  article.classList.remove("is-warning");
+  article.classList.add("is-danger");
+}
+function changer2() {
+  article.classList.remove("is-danger");
+  article.classList.add("is-warning");
+}
+window.setInterval(function() {
+  changer();
+}, 500);
+window.setInterval(function() {
+  changer2();
+}, 1000);
