@@ -1,8 +1,5 @@
 const math = require('mathjs');
-var minLat = 0;
-var maxLat = 0;
-var avgLat = (minLat + maxLat) / 2;
-
+var avgLat = 38.711815;
 
 // // var clustering = require('density-clustering');
 // var regression = require('regression');

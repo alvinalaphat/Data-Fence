@@ -4,7 +4,7 @@
   <title>MapThing</title>
   <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/0.53.0/mapbox-gl.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mapwize@3.2.0/mapwize.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mapwize-ui@1.0.0/mapwizeui.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
   body {
@@ -53,28 +53,12 @@
   <div id="mapwize"></div>
   <script>
       var ExpressScriptsHallVenueId = '5c684b3a08f3430016b0847b';
-      Mapwize.apiKey('7ac5381c88abaf3a79d8a8420fda84fc')
-      Mapwize.map({
-          container: 'mapwize',
-          minZoom: 19
-      }, {
-        venueId: ExpressScriptsHallVenueId
-      }).then(map => {
-          map.centerOnVenue(ExpressScriptsHallVenueId);
-
-          map.setUserPosition({
-              latitude: 38.711736,
-              longitude: -90.311556,
-              floor: 1,
-              accuracy: 5
-          });
-
-          console.log('done')
-
-      }).catch(err => {
-          // Something bad happened during Mapwize loading
-          console.error(err);
-      });
+      var options = {
+          apiKey: '7ac5381c88abaf3a79d8a8420fda84fc'
+        }
+      MapwizeUI.map(options).then(map => {
+        console.log('Mapwize map and ui are ready to be used')
+      })
   </script>
 </body>
 

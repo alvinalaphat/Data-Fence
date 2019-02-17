@@ -1,14 +1,15 @@
 var modal = document.getElementById("modalbox");
-var socket = io('http://localhost:3007');
+var socket = io('https://aa354e43.ngrok.io');
 var answers = [];
+var roomCoordinates = {'103': [38.711884, -90.311358], '104': [38.711729, -90.311345], '106': [38.711719, -90.311088], '100B': [38.711666, -90.311489]};
 
 socket.on('intruderUpdate', function(update) {
   if (update['safeZone'] == 'left') {
-    $('#mapImage').attr('src', 'left.png')
+    $('#mapImage').attr('src', 'staticfiles/left.png')
     $('#dangerNotification').hide()
     $('#safeNotificationLeft').show()
   } else if (update['safeZone'] == 'right') {
-    $('#mapImage').attr('src', 'right.png')
+    $('#mapImage').attr('src', 'staticfiles/right.png')
     $('#dangerNotification').hide()
     $('#safeNotificationRight').show()
   }
@@ -45,9 +46,15 @@ function open() {
 
 var x = document.getElementById("demo");
 
+var options = {
+  enableHighAccuracy: true,
+  timeout: 10000,
+  maximumAge: 0
+};
+
 function getLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.getCurrentPosition(showPosition, error, options);
   } else {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
@@ -58,6 +65,8 @@ function showPosition(position) {
   var long = position.coords.longitude;
   var lat = position.coords.latitude;
   var answ = "yes";
+  var room = $('#roomInput').val();
+
   var response = {
     longitude: long,
     latitude: lat,
@@ -103,3 +112,7 @@ window.setInterval(function() {
 window.setInterval(function() {
   changer2();
 }, 1000);
+
+function error(error) {
+  console.log(error)
+}

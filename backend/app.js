@@ -9,13 +9,14 @@ var MongoClient = require('mongodb').MongoClient;
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var db = mongoose.connection;
-const port = 3007;
+const port = 80;
 const flash = require('connect-flash');
 const { ensureAuthenticated } = require('./views/config/auth');
 var User = require('./lib/User.js');
 var session = require('express-session');
 require('./views/config/passport')(passport);
 urldb = 'mongodb://admin:admin123@ds237955.mlab.com:37955/umslhack';
+const staticDir = '/Users/micah1711/Programming/sluhumslhack/views'
 
 const locateIntruder = require('./intruderAnalytics.js').locateIntruder
 
@@ -91,8 +92,9 @@ io.on('connection', function(socket) {
     }
 
     if (locationData.answer == 'yes' && open) {
-      locationDataList.push([locationData.latitude, locationData.longitude])
-      console.log('data pushed')
+      io.emit('markerUpdate', locationData);
+      locationDataList.push([locationData.latitude, locationData.longitude]);
+      console.log('data pushed');
     }
   });
 });
@@ -176,6 +178,7 @@ app.use(express.static(__dirname + '/views'));
 app.get('/views/js',function(req,res){
     res.sendFile(path.join(__dirname + '/js'));
 });
+app.use('/staticfiles', express.static(staticDir + '/pages'));
 
 
 app.get('/', function(req, res) {
@@ -229,6 +232,14 @@ app.post('/register', function (req, res) {
 app.get('/',function(req,res){
   res.sendFile(path.join(__dirname+'/register.ejs'));
 });
+
+app.get('/studentView', function(req, res) {
+  res.render('pages/studentView.ejs')
+})
+
+app.get('/adminView', function(req, res) {
+  res.render('pages/adminView.ejs')
+})
 
 app.get('/', ensureAuthenticated, (req, res) =>
   res.render('pages/index.ejs', {
