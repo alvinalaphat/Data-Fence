@@ -1,20 +1,21 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="style2.css" type="text/css" />
-    <meta name="viewport" content="width=device-width", initial-scale=1">
+    <meta name="viewport" content="width=device-width", initial-scale="1"/>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css"
     />
   </head>
   <body>
-    <div id="modalbox" class="modal">
+
+    <div id="modalbox" class="modal" style="z-index: 999">
       <article id="article" class="message is-warning">
         <div class="message-header modal-content">
           <h1>INTRUDER ALER: THIS IS NOT A DRILL</h1>
         </div>
         <div class="message-body modal-content">
-          <p>DO YOU SEE OR HEAR THE SCHOOL SHOOTER</p>
+          <p>DO YOU SEE OR HEAR THE INTRUDER</p>
 
           <button id="yes" class="button is-danger">YES</button>
           <button id="no" class="button is-success">No</button>
@@ -22,6 +23,23 @@
       </article>
     </div>
 
+    <section class="section">
+      <div class="container">
+        <div class="notification is-danger" style="" id="dangerNotification">
+          <strong>You are not safe to exit the building! The intruder is nearby.</strong>
+        </div>
+
+        <div class="notification is-success" style="display: none" id="safeNotification">
+          <strong>You are safe to exit the building.</strong>
+        </div>
+        <div class="box">
+          <img id="mapImage" src="default.png" style=""/>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="index2.js"></script>
   </body>
 </html>
