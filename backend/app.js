@@ -275,27 +275,25 @@ app.get('/search', (req, res, next) => {
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-// namespaces and room assignments
-var nspDefault = io.of('/default');
 
-nspDefault.on('connection', function(socket) {
-  console.log('Client has connected');
-  socket.emit('roomQuery');
-  socket.on('room', function(roomAssignment) {
-    console.log(roomAssignment)
-    socket.join(roomAssignment);
-    socket.room = roomAssignment;
-  })
+app.get('/map', (req, res, next) => {
+  res.render('pages/map.ejs');
+});
 
-  socket.on('message', function(messageData) {
-    console.log(messageData);
-    console.log(socket.room)
-    nspDefault.in(socket.room).emit('message', messageData);
-  })
+app.get('/register', (req, res, next) => {
+  res.render('pages/register.ejs');
 })
 
-nspDefault.on('message', function(messageData) {
-  nspDefault.to('')
+app.get('/home', (req, res, next) => {
+  res.render('pages/home.ejs');
+})
+
+app.get('/info', (req, res, next) => {
+  res.render('pages/info.ejs');
+})
+
+app.get('/dashboard', (req, res, next) => {
+  res.render('pages/dashboard.ejs');
 })
 
 // server listen
