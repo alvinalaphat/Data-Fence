@@ -193,15 +193,18 @@ app.get('/',function(req,res){
 
 
 app.get('/', ensureAuthenticated, (req, res) =>
-  res.render('pages/index.ejs', {
+  res.render('pages/dashboard.ejs', {
     user: req.user
 })
 );
 
-// app.get('/',function(req,res){
-//   res.render('pages/index.ejs');
-//   user: req.user
-// });
+app.get('/news', (req, res, next) => {
+  res.render('pages/news.ejs');
+});
+
+app.get('/contact', (req, res, next) => {
+  res.render('pages/contact.ejs');
+});
 
 app.get('/login', (req, res, next) => {
   res.render('pages/login.ejs');
@@ -211,7 +214,9 @@ app.get('/register', (req, res, next) => {
   res.render('pages/register.ejs');
 })
 
-
+app.get('/dashboard', (req, res, next) => {
+  res.render('pages/dashboard.ejs');
+})
 
 app.get('/search', (req, res, next) => {
   res.render('pages/search.ejs');
@@ -245,7 +250,7 @@ nspDefault.on('message', function(messageData) {
 })
 
 // server listen
-server.listen(port, '127.0.01', function() {
+server.listen(port, '127.0.0.1', function() {
   console.log('Listening on ' + port)
 });
 
