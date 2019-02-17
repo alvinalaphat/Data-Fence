@@ -284,6 +284,10 @@ app.get('/register', (req, res, next) => {
   res.render('pages/register.ejs');
 })
 
+app.get('/contact', (req, res, next) => {
+  res.render('pages/contact.ejs');
+})
+
 app.get('/home', (req, res, next) => {
   res.render('pages/home.ejs');
 })
