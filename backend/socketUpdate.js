@@ -2,7 +2,7 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-const locateIntruder = require('./intruderAnalytics.js').locateIntruder
+// const locateIntruder = require('./intruderAnalytics.js').locateIntruder
 var locationData = [];
 var timeout = 30;
 var open = true;

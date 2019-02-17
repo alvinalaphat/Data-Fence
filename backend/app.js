@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var io = require('socket.io')(server);
 var path = require('path');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -8,6 +7,7 @@ var mongodb = require('mongodb');
 var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 var MongoClient = require('mongodb').MongoClient;
 var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 var db = mongoose.connection;
 const port = 3007;
 const flash = require('connect-flash');
@@ -16,6 +16,8 @@ var User = require('./lib/User.js');
 var session = require('express-session');
 require('./views/config/passport')(passport);
 urldb = 'mongodb://admin:admin123@ds237955.mlab.com:37955/umslhack';
+
+const locateIntruder = require('./intruderAnalytics.js').locateIntruder
 
 // db.myusers.find({"skills":{"$in":["bevel"]}})
 
@@ -69,6 +71,33 @@ User.findById(id, function(err, user) {
   done(err, user);
 });
 });
+
+///location socket stuff BEGIN
+var locationData = [];
+var timeout = 30;
+var open = true;
+
+io.on('connection', function(socket) {
+
+  socket.on('locationUpdate', function(locationData) {
+
+    if (locationData.length == 0) {
+      setTimeout(function() {
+        open = false;
+        var intruderUpdate = locateIntruder(locationData);
+        io.emit('intruderUpdate', intruderUpdate);
+      }, timeout * 1000);
+    }
+
+    if (answer == 'yes' && open) {
+      locationData.push([req.body.latitude, req.body.longitude])
+    }
+
+  });
+});
+///location socket stuff END
+
+
 
 // login
 app.post('/login', (req, res, next) => {
