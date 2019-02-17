@@ -9,14 +9,13 @@ var passport = require('passport'), LocalStrategy = require('passport-local').St
 var MongoClient = require('mongodb').MongoClient;
 var server = require('http').createServer(app);
 var db = mongoose.connection;
-const port = 3005;
+const port = 3007;
 const flash = require('connect-flash');
 const { ensureAuthenticated } = require('./views/config/auth');
 var User = require('./lib/User.js');
 var session = require('express-session');
-
 require('./views/config/passport')(passport);
-urldb = 'mongodb+srv://alvinalaphat:DEP7ajrlIbPH1gZr@cluster0-1v2q4.mongodb.net/UserSystem?retryWrites=true';
+urldb = 'mongodb://admin:admin123@ds237955.mlab.com:37955/umslhack';
 
 // db.myusers.find({"skills":{"$in":["bevel"]}})
 
@@ -267,7 +266,7 @@ nspDefault.on('message', function(messageData) {
 })
 
 // server listen
-server.listen(port, '127.0.01', function() {
+server.listen(port, '127.0.0.1', function() {
   console.log('Listening on ' + port)
 });
 
