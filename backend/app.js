@@ -92,7 +92,6 @@ io.on('connection', function(socket) {
     if (answer == 'yes' && open) {
       locationData.push([req.body.latitude, req.body.longitude])
     }
-
   });
 });
 ///location socket stuff END
