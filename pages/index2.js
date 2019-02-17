@@ -1,5 +1,5 @@
 var modal = document.getElementById("modalbox");
-var socket = io('http://localhost:3007');
+var socket = io('http://localhost:3000');
 var answers = [];
 
 socket.on('intruderUpdate', function(update) {
