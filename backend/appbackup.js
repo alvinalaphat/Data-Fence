@@ -14,6 +14,7 @@ const flash = require('connect-flash');
 const { ensureAuthenticated } = require('./views/config/auth');
 var User = require('./lib/User.js');
 var session = require('express-session');
+
 require('./views/config/passport')(passport);
 urldb = 'mongodb://admin:admin123@ds237955.mlab.com:37955/umslhack';
 
@@ -35,10 +36,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 
 // express session
 app.use(
@@ -60,6 +57,26 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+//passport authentication
+// passport.use(new LocalStrategy(
+//   function(email, password, done) {
+//     User.findOne({ email: email }, function(err, user) {
+//       if (err) {
+//         return done(err);
+//       }
+//       if (!user) {
+//         return done(null, false, { message: 'Incorrect Email.' });
+//       }
+//       if (!user.validPassword(password)) {
+//         return done(null, false, { message: 'Incorrect password.' });
+//       }
+//       return done(null, user);
+//     });
+//   }
+// ));
+
+
 passport.serializeUser(function(user, done) {
 done(null, user.id);
 });
@@ -72,35 +89,12 @@ User.findById(id, function(err, user) {
 
 // login
 app.post('/login', (req, res, next) => {
-  let email = req.body.email;
-  let password = req.body.password;
-console.log(email);
-console.log(password);
-
-  User.getUserByUsername(email, (err, user) => {
-    if(err) throw err;
-    if(!user) {
-      return res.json({success: false, msg: 'User not found'});
-    }
-
-    User.comparePassword(password, user.password, (err, isMatch) => {
-      if(err) throw err;
-      if(isMatch) {
-        return res.send({
-          success: true,
-          user: {
-            id: user._id,
-            name: user.name,
-            email: user.email
-          }
-        })
-      } else {
-        return res.send({success: false, msg: 'Wrong password'});
-      }
-    });
-  });
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+  })(req, res, next);
 });
-
 
 // logout
 app.get('/logout', (req, res) => {
@@ -160,46 +154,35 @@ app.post('/register', function (req, res) {
     var firstname = req.body.firstname;
     var lastname = req.body.lastname;
     var skills = req.body.skills;
-    var city = req.body.city;
 
     var newuser = new User({
       email: email,
       password: password,
       firstname: firstname,
       lastname: lastname,
-      city: city,
       skills: JSON.parse(skills)
     });
 
-    // User.find({
-    //   email: email
-    // }).then(doc => {
-    //   console.log(doc);
-    //   if(doc.length > 0) {
-    //     // user already exists
-    //     res.status(200).json({
-    //       success: false,
-    //       message: 'User already exists'
-    //     })
-    //   } else {
-    //     newuser.save(function(err,savedUser) {
-    //       if(err){
-    //         console.log(err);
-    //         return res.status(500).send();
-    //       }
-    //       return res.status(200).send();
-    //     })
-    //   }
-    // })
-
-    User.addUser(newuser,(err =>{
-      if(err){
-        res.json({success:false,msg:"Something went wrong"})
-      }else{
-        res.json({success:true,msg:"Registered"})
-
+    User.find({
+      email: email
+    }).then(doc => {
+      console.log(doc);
+      if(doc.length > 0) {
+        // user already exists
+        res.status(200).json({
+          success: false,
+          message: 'User already exists'
+        })
+      } else {
+        newuser.save(function(err,savedUser) {
+          if(err){
+            console.log(err);
+            return res.status(500).send();
+          }
+          return res.status(200).send();
+        })
       }
-    }))
+    })
 
 });
 
@@ -208,31 +191,32 @@ app.get('/',function(req,res){
   res.sendFile(path.join(__dirname+'/register.ejs'));
 });
 
+
 app.get('/', ensureAuthenticated, (req, res) =>
-  res.render('pages/index.ejs', {
+  res.render('pages/dashboard.ejs', {
     user: req.user
 })
 );
 
-// app.get('/',function(req,res){
-//   res.render('pages/index.ejs');
-//   user: req.user
-// });
+app.get('/news', (req, res, next) => {
+  res.render('pages/news.ejs');
+});
+
+app.get('/contact', (req, res, next) => {
+  res.render('pages/contact.ejs');
+});
 
 app.get('/login', (req, res, next) => {
   res.render('pages/login.ejs');
-});
-
-
-app.get('/map', (req, res, next) => {
-  res.render('pages/map.ejs');
 });
 
 app.get('/register', (req, res, next) => {
   res.render('pages/register.ejs');
 })
 
-
+app.get('/dashboard', (req, res, next) => {
+  res.render('pages/dashboard.ejs');
+})
 
 app.get('/search', (req, res, next) => {
   res.render('pages/search.ejs');
