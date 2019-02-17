@@ -27,7 +27,8 @@ function unweightedAverage(matrix) {
   return sum/matrix.length
 }
 
-exports.findCentroid = function (latLonPairs) {
+function findCentroid(latLonPairs) {
+	// finding centroid of lat lon pairs
   var lonCoords = [];
   var latCoords = [];
   for (var i = 0; i < latLonPairs.length; i++) {
