@@ -46,8 +46,8 @@ function findCentroid(latLonPairs) {
 exports.locateIntruder = function(locationData) {
 	var intruderLocation = findCentroid(locationData);
 	if (intruderLocation[0] > avgLat) {
-		return JSON.stringify({safeZone: 'left'})
+		return {safeZone: 'left'}
 	} else {
-		return JSON.stringify({safeZone: 'right'})
+		return {safeZone: 'right'}
 	}
 }

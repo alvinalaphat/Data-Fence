@@ -2,7 +2,7 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-const findIntruder = require('')
+const locateIntruder = require('./intruderAnalytics.js').locateIntruder
 var locationData = [];
 var timeout = 30;
 var open = true;
@@ -16,7 +16,8 @@ io.on('connection', function(socket) {
     if (locationData.length == 0) {
       setTimeout(function() {
         open = false;
-        //put the location prediction and emit the update predictions to the users
+        var intruderUpdate = locateIntruder(locationData);
+        io.emit('intruderUpdate', intruderUpdate);
       }, timeout * 1000);
     }
 
