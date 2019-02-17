@@ -38,7 +38,7 @@ jQuery.post(
 "http://127.0.0.1:3007/login", user, function(data){
   if(data.success){
     //route to dashboard
-    window.location = 'http://localhost:3007'
+    window.location = 'http://localhost:3007/home'
   }else{
     //alert
     alert("Password or email is wrong")
