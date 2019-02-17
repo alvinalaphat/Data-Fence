@@ -3,6 +3,7 @@
 <head>
   <title>MapThing</title>
   <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/0.53.0/mapbox-gl.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mapwize@3.2.0/mapwize.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
@@ -60,6 +61,16 @@
         venueId: ExpressScriptsHallVenueId
       }).then(map => {
           map.centerOnVenue(ExpressScriptsHallVenueId);
+
+          map.setUserPosition({
+              latitude: 38.711736,
+              longitude: -90.311556,
+              floor: 1,
+              accuracy: 5
+          });
+
+          console.log('done')
+
       }).catch(err => {
           // Something bad happened during Mapwize loading
           console.error(err);
