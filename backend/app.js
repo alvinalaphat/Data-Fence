@@ -186,18 +186,10 @@ app.post('/register', function (req, res) {
     var email = req.body.email;
     console.log(email + " Just Registered!")
     var password = req.body.password;
-    var firstname = req.body.firstname;
-    var lastname = req.body.lastname;
-    var skills = req.body.skills;
-    var city = req.body.city;
 
     var newuser = new User({
       email: email,
       password: password,
-      firstname: firstname,
-      lastname: lastname,
-      city: city,
-      skills: JSON.parse(skills)
     });
 
     // User.find({
