@@ -17,7 +17,14 @@
   },
   "homepage": "https://github.com/MicahSee/sluhumslhack#readme",
   "dependencies": {
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "mapwize": "^3.2.1",
-    "mathjs": "^5.4.2"
+    "mathjs": "^5.4.2",
+    "mongoose": "^5.4.13",
+    "morgan": "^1.9.1",
+    "socket.io": "^2.2.0"
   }
 }
