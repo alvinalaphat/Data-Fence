@@ -12,7 +12,7 @@
     <div id="modalbox" class="modal" style="z-index: 999">
       <article id="article" class="message is-warning">
         <div class="message-header modal-content">
-          <h1>INTRUDER ALER: THIS IS NOT A DRILL</h1>
+          <h1>INTRUDER ALERT: THIS IS NOT A DRILL</h1>
         </div>
         <div class="message-body modal-content">
           <p>DO YOU SEE OR HEAR THE INTRUDER</p>
@@ -25,16 +25,23 @@
 
     <section class="section">
       <div class="container">
+
         <div class="notification is-danger" style="" id="dangerNotification">
           <strong>You are not safe to exit the building! The intruder is nearby.</strong>
         </div>
 
-        <div class="notification is-success" style="display: none" id="safeNotification">
-          <strong>You are safe to exit the building.</strong>
+        <div class="notification is-success" style="display: none" id="safeNotificationLeft">
+          <strong>You are safe to exit the building through exits on the left side.</strong>
         </div>
+
+        <div class="notification is-success" style="display: none" id="safeNotificationRight">
+          <strong>You are safe to exit the building through exits on the right side.</strong>
+        </div>
+
         <div class="box">
           <img id="mapImage" src="default.png" style=""/>
         </div>
+
       </div>
     </section>
 

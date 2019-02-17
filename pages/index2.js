@@ -1,16 +1,16 @@
 var modal = document.getElementById("modalbox");
-var socket = io('http://localhost:3000');
+var socket = io('http://localhost:3007');
 var answers = [];
 
 socket.on('intruderUpdate', function(update) {
   if (update['safeZone'] == 'left') {
     $('#mapImage').attr('src', 'left.png')
     $('#dangerNotification').hide()
-    $('#safeNotification').show()
+    $('#safeNotificationLeft').show()
   } else if (update['safeZone'] == 'right') {
     $('#mapImage').attr('src', 'right.png')
     $('#dangerNotification').hide()
-    $('#safeNotification').show()
+    $('#safeNotificationRight').show()
   }
 })
 
@@ -40,7 +40,7 @@ no.onclick = function() {
 function open() {
   setTimeout(function() {
     modal.style.display = "flex";
-  }, 30000);
+  }, 120000);
 }
 
 var x = document.getElementById("demo");
@@ -63,7 +63,6 @@ function showPosition(position) {
     latitude: lat,
     answer: "yes"
   };
-  document.getElementById("demo2").innerHTML = myJson;
   socket.emit('locationUpdate', response);
 }
 
@@ -85,7 +84,6 @@ function showPosition2(position) {
     latitude: lat,
     answer: "no"
   };
-  document.getElementById("demo2").innerHTML = myJson2;
   socket.emit('locationUpdate', response);
 }
 

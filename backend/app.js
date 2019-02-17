@@ -73,24 +73,26 @@ User.findById(id, function(err, user) {
 });
 
 ///location socket stuff BEGIN
-var locationData = [];
-var timeout = 30;
+var locationDataList = [];
+var timeout = 5;
 var open = true;
 
 io.on('connection', function(socket) {
 
   socket.on('locationUpdate', function(locationData) {
 
-    if (locationData.length == 0) {
+    if (locationDataList.length == 0) {
       setTimeout(function() {
+        console.log('started')
         open = false;
-        var intruderUpdate = locateIntruder(locationData);
+        var intruderUpdate = locateIntruder(locationDataList);
         io.emit('intruderUpdate', intruderUpdate);
-      }, timeout * 1000);
+      }, 5000);
     }
 
-    if (answer == 'yes' && open) {
-      locationData.push([req.body.latitude, req.body.longitude])
+    if (locationData.answer == 'yes' && open) {
+      locationDataList.push([locationData.latitude, locationData.longitude])
+      console.log('data pushed')
     }
   });
 });
